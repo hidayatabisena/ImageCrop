@@ -9,8 +9,13 @@ import Foundation
 import SwiftUI
 
 class ImageEditorVM: ObservableObject {
-    @Published var image: UIImage?
+    @Published var image: UIImage? {
+        didSet {
+            rotatedImage = image
+        }
+    }
     @Published var rotatedImage: UIImage?
+    @Published var isImagePickerPresented = false
     private var rotationAngle: CGFloat = 0
     
     init(image: UIImage?) {

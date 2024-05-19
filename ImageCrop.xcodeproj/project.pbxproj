@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5322CB332BFABB28006FEBD7 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5322CB322BFABB28006FEBD7 /* ImagePicker.swift */; };
 		5391721E2BFA355C00B52C54 /* ImageCropApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5391721D2BFA355C00B52C54 /* ImageCropApp.swift */; };
 		539172202BFA355C00B52C54 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5391721F2BFA355C00B52C54 /* ContentView.swift */; };
 		539172222BFA355E00B52C54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 539172212BFA355E00B52C54 /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5322CB322BFABB28006FEBD7 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		5391721A2BFA355C00B52C54 /* ImageCrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageCrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5391721D2BFA355C00B52C54 /* ImageCropApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropApp.swift; sourceTree = "<group>"; };
 		5391721F2BFA355C00B52C54 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,6 +46,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5322CB312BFABB16006FEBD7 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				5322CB322BFABB28006FEBD7 /* ImagePicker.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		539172112BFA355C00B52C54 = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +143,7 @@
 		539172352BFA4A0000B52C54 /* SimpleApproach */ = {
 			isa = PBXGroup;
 			children = (
+				5322CB312BFABB16006FEBD7 /* Helper */,
 				5391723C2BFA4B1F00B52C54 /* View */,
 				539172392BFA4A6D00B52C54 /* ViewModel */,
 				539172362BFA4A4300B52C54 /* Model */,
@@ -238,6 +249,7 @@
 				539172322BFA378300B52C54 /* CropView.swift in Sources */,
 				5391723E2BFA4B2C00B52C54 /* ImageEditorView.swift in Sources */,
 				539172382BFA4A5200B52C54 /* ImageModel.swift in Sources */,
+				5322CB332BFABB28006FEBD7 /* ImagePicker.swift in Sources */,
 				539172202BFA355C00B52C54 /* ContentView.swift in Sources */,
 				5391723B2BFA4A7D00B52C54 /* ImageEditorVM.swift in Sources */,
 				5391721E2BFA355C00B52C54 /* ImageCropApp.swift in Sources */,

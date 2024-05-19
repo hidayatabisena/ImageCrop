@@ -37,6 +37,17 @@ struct ImageEditorView: View {
                     .background(Color.blue)
                     .cornerRadius(10)
             }
+            
+            Button(action: {
+                vm.isImagePickerPresented = true
+            }) {
+                Text("Open Gallery")
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.green)
+                    .cornerRadius(10)
+            }
+            .padding()
         }
         .navigationBarTitle("写真トリミング", displayMode: .inline)
         .navigationBarItems(leading: Button(action: {
@@ -45,6 +56,9 @@ struct ImageEditorView: View {
             Image(systemName: "arrow.left")
                 .foregroundColor(.black)
         })
+        .sheet(isPresented: $vm.isImagePickerPresented) {
+            ImagePicker(selectedImage: $vm.image)
+        }
     }
 }
 
