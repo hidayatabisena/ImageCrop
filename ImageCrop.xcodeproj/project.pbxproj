@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5322CB332BFABB28006FEBD7 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5322CB322BFABB28006FEBD7 /* ImagePicker.swift */; };
+		5322CB352BFAC349006FEBD7 /* CircularCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5322CB342BFAC349006FEBD7 /* CircularCropView.swift */; };
 		5391721E2BFA355C00B52C54 /* ImageCropApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5391721D2BFA355C00B52C54 /* ImageCropApp.swift */; };
 		539172202BFA355C00B52C54 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5391721F2BFA355C00B52C54 /* ContentView.swift */; };
 		539172222BFA355E00B52C54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 539172212BFA355E00B52C54 /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		5322CB322BFABB28006FEBD7 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		5322CB342BFAC349006FEBD7 /* CircularCropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularCropView.swift; sourceTree = "<group>"; };
 		5391721A2BFA355C00B52C54 /* ImageCrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageCrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5391721D2BFA355C00B52C54 /* ImageCropApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropApp.swift; sourceTree = "<group>"; };
 		5391721F2BFA355C00B52C54 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -50,6 +52,7 @@
 			isa = PBXGroup;
 			children = (
 				5322CB322BFABB28006FEBD7 /* ImagePicker.swift */,
+				5322CB342BFAC349006FEBD7 /* CircularCropView.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				539172382BFA4A5200B52C54 /* ImageModel.swift in Sources */,
 				5322CB332BFABB28006FEBD7 /* ImagePicker.swift in Sources */,
 				539172202BFA355C00B52C54 /* ContentView.swift in Sources */,
+				5322CB352BFAC349006FEBD7 /* CircularCropView.swift in Sources */,
 				5391723B2BFA4A7D00B52C54 /* ImageEditorVM.swift in Sources */,
 				5391721E2BFA355C00B52C54 /* ImageCropApp.swift in Sources */,
 				539172402BFA4CF400B52C54 /* SimpleApproachView.swift in Sources */,

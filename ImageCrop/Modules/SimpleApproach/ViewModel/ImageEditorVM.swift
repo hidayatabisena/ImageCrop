@@ -11,16 +11,17 @@ import SwiftUI
 class ImageEditorVM: ObservableObject {
     @Published var image: UIImage? {
         didSet {
-            rotatedImage = image
+            croppedImage = image
         }
     }
-    @Published var rotatedImage: UIImage?
+    // @Published var rotatedImage: UIImage?
+    @Published var croppedImage: UIImage?
     @Published var isImagePickerPresented = false
     private var rotationAngle: CGFloat = 0
     
     init(image: UIImage?) {
         self.image = image
-        self.rotatedImage = image
+        self.croppedImage = image
     }
     
     func rotateImage() {
@@ -44,13 +45,25 @@ class ImageEditorVM: ObservableObject {
             }
         }
         
-        self.rotatedImage = newImage
+        self.croppedImage = newImage
     }
     
+    //    func saveImage() {
+    //        guard let rotatedImage = rotatedImage else { return }
+    //        let circularImage = cropToCircle(image: rotatedImage)
+    //        UIImageWriteToSavedPhotosAlbum(circularImage, nil, nil, nil)
+    //    }
+    
+    //    func saveImage() {
+    //        guard let croppedImage = croppedImage else { return }
+    //        let circularImage = cropToCircle(image: croppedImage)
+    //        UIImageWriteToSavedPhotosAlbum(croppedImage, nil, nil, nil)
+    //    }
+    
+    var coordinator: CircularCropView.Coordinator?
+    
     func saveImage() {
-        guard let rotatedImage = rotatedImage else { return }
-        let circularImage = cropToCircle(image: rotatedImage)
-        UIImageWriteToSavedPhotosAlbum(circularImage, nil, nil, nil)
+        coordinator?.cropAndSaveImage()
     }
     
     private func cropToCircle(image: UIImage) -> UIImage {

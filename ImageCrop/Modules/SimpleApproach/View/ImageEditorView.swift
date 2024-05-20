@@ -12,12 +12,21 @@ struct ImageEditorView: View {
     
     var body: some View {
         VStack(spacing: 24) {
-            if let image = vm.rotatedImage ?? vm.image {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFit()
+            //            if let image = vm.rotatedImage ?? vm.image {
+            //                Image(uiImage: image)
+            //                    .resizable()
+            //                    .scaledToFit()
+            //                    .frame(height: 300)
+            //                    .clipShape(Circle())
+            //            }
+            if vm.image != nil {
+                CircularCropView(image: $vm.image, croppedImage: $vm.croppedImage)
                     .frame(height: 300)
                     .clipShape(Circle())
+                    .padding()
+                    .onAppear {
+                        vm.coordinator = CircularCropView(image: $vm.image, croppedImage: $vm.croppedImage).makeCoordinator()
+                    }
             }
             
             Button {
