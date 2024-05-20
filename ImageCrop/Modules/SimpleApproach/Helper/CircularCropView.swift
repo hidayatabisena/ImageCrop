@@ -29,6 +29,9 @@ struct CircularCropView: UIViewRepresentable {
                 view.center = CGPoint(x: view.center.x + translation.x, y: view.center.y + translation.y)
                 gesture.setTranslation(.zero, in: view.superview)
             }
+            if gesture.state == .ended {
+                currentTranslation = CGPoint(x: currentTranslation.x + translation.x, y: currentTranslation.y + translation.y)
+            }
         }
         
         @objc func handlePinchGesture(_ gesture: UIPinchGestureRecognizer) {
@@ -36,6 +39,9 @@ struct CircularCropView: UIViewRepresentable {
             if gesture.state == .began || gesture.state == .changed {
                 view.transform = view.transform.scaledBy(x: gesture.scale, y: gesture.scale)
                 gesture.scale = 1.0
+            }
+            if gesture.state == .ended {
+                currentScale *= gesture.scale
             }
         }
         
@@ -45,29 +51,66 @@ struct CircularCropView: UIViewRepresentable {
                 view.transform = view.transform.rotated(by: gesture.rotation)
                 gesture.rotation = 0.0
             }
+            if gesture.state == .ended {
+                currentRotation += gesture.rotation
+            }
         }
         
         func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
             return true
         }
         
+        //        func cropToCircle() {
+        //            guard let image = parent.image else { return }
+        //
+        //            let imageView = UIImageView(image: image)
+        //            imageView.contentMode = .scaleAspectFit
+        //            imageView.frame = CGRect(origin: .zero, size: image.size)
+        //
+        //            let renderer = UIGraphicsImageRenderer(size: image.size)
+        //            let circularImage = renderer.image { context in
+        //                let rect = CGRect(origin: .zero, size: image.size)
+        //                context.cgContext.addEllipse(in: rect)
+        //                context.cgContext.clip()
+        //                imageView.layer.render(in: context.cgContext)
+        //            }
+        //
+        //            parent.croppedImage = circularImage
+        //        }
+        
+        // lagi eksperimen
         func cropToCircle() {
             guard let image = parent.image else { return }
             
+            // Buat UIImageView dengan gambar dari gallery
             let imageView = UIImageView(image: image)
             imageView.contentMode = .scaleAspectFit
             imageView.frame = CGRect(origin: .zero, size: image.size)
             
+            // Terapkan transformasi yang sama ke UIImageView
+            imageView.transform = CGAffineTransform(translationX: currentTranslation.x, y: currentTranslation.y)
+                .scaledBy(x: currentScale, y: currentScale)
+                .rotated(by: currentRotation)
+            
             let renderer = UIGraphicsImageRenderer(size: image.size)
             let circularImage = renderer.image { context in
+                // Terapkan transformasi ke konteks grafis
+                context.cgContext.translateBy(x: image.size.width / 2, y: image.size.height / 2)
+                context.cgContext.concatenate(imageView.transform)
+                context.cgContext.translateBy(x: -image.size.width / 2, y: -image.size.height / 2)
+                
+                // Bikin jadi lingkaran
                 let rect = CGRect(origin: .zero, size: image.size)
                 context.cgContext.addEllipse(in: rect)
                 context.cgContext.clip()
+                
+                // Render gambar
                 imageView.layer.render(in: context.cgContext)
             }
             
             parent.croppedImage = circularImage
         }
+        
         
         func cropAndSaveImage() {
             cropToCircle()
@@ -82,7 +125,7 @@ struct CircularCropView: UIViewRepresentable {
             } else {
                 print("Image saved successfully!")
             }
-        } 
+        }
     }
     
     func makeCoordinator() -> Coordinator {

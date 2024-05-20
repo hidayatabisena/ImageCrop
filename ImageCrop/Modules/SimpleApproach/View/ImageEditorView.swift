@@ -25,7 +25,9 @@ struct ImageEditorView: View {
                     .clipShape(Circle())
                     .padding()
                     .onAppear {
-                        vm.coordinator = CircularCropView(image: $vm.image, croppedImage: $vm.croppedImage).makeCoordinator()
+                        if vm.coordinator == nil {
+                            vm.coordinator = CircularCropView(image: $vm.image, croppedImage: $vm.croppedImage).makeCoordinator()
+                        }
                     }
             }
             
