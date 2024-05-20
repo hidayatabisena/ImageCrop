@@ -33,7 +33,7 @@ struct CircularCropView: UIViewRepresentable {
                 currentTranslation = CGPoint(x: currentTranslation.x + translation.x, y: currentTranslation.y + translation.y)
             }
         }
-        
+
         @objc func handlePinchGesture(_ gesture: UIPinchGestureRecognizer) {
             guard let view = gesture.view else { return }
             if gesture.state == .began || gesture.state == .changed {
@@ -44,7 +44,7 @@ struct CircularCropView: UIViewRepresentable {
                 currentScale *= gesture.scale
             }
         }
-        
+
         @objc func handleRotationGesture(_ gesture: UIRotationGestureRecognizer) {
             guard let view = gesture.view else { return }
             if gesture.state == .began || gesture.state == .changed {
@@ -82,7 +82,7 @@ struct CircularCropView: UIViewRepresentable {
         func cropToCircle() {
             guard let image = parent.image else { return }
             
-            // Buat UIImageView dengan gambar dari gallery
+            // Buat UIImageView dengan gambar asli
             let imageView = UIImageView(image: image)
             imageView.contentMode = .scaleAspectFit
             imageView.frame = CGRect(origin: .zero, size: image.size)
@@ -99,7 +99,7 @@ struct CircularCropView: UIViewRepresentable {
                 context.cgContext.concatenate(imageView.transform)
                 context.cgContext.translateBy(x: -image.size.width / 2, y: -image.size.height / 2)
                 
-                // Bikin jadi lingkaran
+                // Bikin jadi circle
                 let rect = CGRect(origin: .zero, size: image.size)
                 context.cgContext.addEllipse(in: rect)
                 context.cgContext.clip()
@@ -108,9 +108,15 @@ struct CircularCropView: UIViewRepresentable {
                 imageView.layer.render(in: context.cgContext)
             }
             
-            parent.croppedImage = circularImage
+            // Crop area yang relevan dari gambar yang sudah di-transformasi
+            let cropRect = CGRect(x: (image.size.width - image.size.height) / 2, y: 0, width: image.size.height, height: image.size.height)
+            if let croppedCGImage = circularImage.cgImage?.cropping(to: cropRect) {
+                let finalCircularImage = UIImage(cgImage: croppedCGImage)
+                parent.croppedImage = finalCircularImage
+            } else {
+                parent.croppedImage = circularImage
+            }
         }
-        
         
         func cropAndSaveImage() {
             cropToCircle()
